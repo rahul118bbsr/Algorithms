@@ -4,8 +4,6 @@ import java.util.Objects;
 
 public class BinarySearchTree {
 	private Node rootNode = null;
-	private static int lh = 0;
-	private static int rh = 0;
 
 	public void createBST(int[] values) {
 		for (int i : values) {
@@ -151,7 +149,7 @@ public class BinarySearchTree {
 }
 
 class Node {
-	private int value;
+	public int value;
 	public Node leftChildNode;
 	public Node rightChildNode;
 

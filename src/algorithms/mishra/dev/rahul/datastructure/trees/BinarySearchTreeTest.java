@@ -16,8 +16,14 @@ public class BinarySearchTreeTest {
 //		System.out.println(bst.contains(bst.getRootNode(), 10));
 		
 //		bst.postOrderTraversal(bst.getRootNode());
-		TopView tv = new TopView();
-		tv.top_view(bst.getRootNode());
+//		TopView tv = new TopView();
+//		tv.top_view(bst.getRootNode());
+		
+//		LevelOrderTravsersal lot = new LevelOrderTravsersal();
+//		lot.LevelOrder(bst.getRootNode());
+		
+		BinarySearchTreeCheck bstc = new BinarySearchTreeCheck();
+		System.out.println(bstc.checkBST(bst.getRootNode()));
 		
 		
 //		BinarySearchTree_1 bst_1 = new BinarySearchTree_1();
