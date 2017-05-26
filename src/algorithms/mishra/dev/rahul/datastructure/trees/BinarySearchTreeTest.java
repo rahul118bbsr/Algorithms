@@ -4,12 +4,12 @@ public class BinarySearchTreeTest {
 
 	public static void main(String[] args) {
 //		int[] data = {5, 3, 8, 4, 1, 7, 14, 6, 11, 12, 16, 15, 9};
-		int[] data = {5,3,8,2,4,7, 9, 11};
+		int[] data = {10, 18, 5, 2, 12, 20, 8, 9, 1, 11, 25, 19};
 		BinarySearchTree bst = new BinarySearchTree();
 		bst.createBST(data);
 		System.out.println(bst);
-//		bst.delete(bst.getRootNode(), 3);
-//		System.out.println(bst);
+		bst.delete(bst.getRootNode(), 18);
+		System.out.println(bst);
 //		System.out.println(bst.findMax(bst.getRootNode()));
 //		System.out.println(bst.findMin(bst.getRootNode()));
 //		System.out.println(bst.findHeight(bst.getRootNode()));
@@ -22,8 +22,8 @@ public class BinarySearchTreeTest {
 //		LevelOrderTravsersal lot = new LevelOrderTravsersal();
 //		lot.LevelOrder(bst.getRootNode());
 		
-		BinarySearchTreeCheck bstc = new BinarySearchTreeCheck();
-		System.out.println(bstc.checkBST(bst.getRootNode()));
+//		BinarySearchTreeCheck bstc = new BinarySearchTreeCheck();
+//		System.out.println(bstc.checkBST(bst.getRootNode()));
 		
 		
 //		BinarySearchTree_1 bst_1 = new BinarySearchTree_1();

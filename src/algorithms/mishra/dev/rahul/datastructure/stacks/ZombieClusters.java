@@ -1,5 +1,13 @@
 package algorithms.mishra.dev.rahul.datastructure.stacks;
 
+/**
+ * Audible Hackerrank Question
+ * 
+ * @author Rahul Dev Mishra
+ * @assignment  
+ * @date 19-May-2017 3:50:35 PM
+ *
+ */
 public class ZombieClusters {
 
 	public static void main(String[] args) {

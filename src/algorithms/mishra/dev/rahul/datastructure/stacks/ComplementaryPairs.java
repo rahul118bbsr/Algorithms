@@ -5,6 +5,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Audible Hackerrank Question
+ * 
+ * @author Rahul Dev Mishra
+ * @assignment  
+ * @date 19-May-2017 3:51:13 PM
+ *
+ */
 public class ComplementaryPairs {
 
 	public static void main(String[] args) {
