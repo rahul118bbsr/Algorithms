@@ -15,9 +15,6 @@ import java.util.Scanner;
  */
 public class InsertNodeAtTail {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter the number of elements: ");
@@ -34,13 +31,10 @@ public class InsertNodeAtTail {
 	}
 
 	class LinkedList {
-//		private Node head;
-		
 		public Node add(Node head, int data) {
 			Node end = new Node(data);
 			if(head == null) {
-				head = end;
-				return head;
+				return end;
 			}
 			
 			Node curr = head;
@@ -51,15 +45,6 @@ public class InsertNodeAtTail {
 			curr.next = end;
 			return head;
 		}
-		
-//		@Override
-//		public String toString() {
-//			return head.toString();
-//		}
-//		
-//		public Node getHead() {
-//			return head;
-//		}
 	}
 
 	class Node {
