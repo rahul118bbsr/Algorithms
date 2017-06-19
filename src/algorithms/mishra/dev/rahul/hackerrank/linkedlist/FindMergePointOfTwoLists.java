@@ -44,10 +44,8 @@ public class FindMergePointOfTwoLists {
 					return nodeA.data;
 				}
 				
-				nodeA = nodeA.next;
-				nodeB = nodeB.next;
-				nodeA = nodeA == null ? headB : nodeA;
-				nodeB = nodeB == null ? headA : nodeB;
+				nodeA = nodeA.next == null ? headB : nodeA.next;
+				nodeB = nodeB.next == null ? headA : nodeB.next;
 			}
 		}
 	}
