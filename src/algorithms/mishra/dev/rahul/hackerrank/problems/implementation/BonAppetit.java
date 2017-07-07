@@ -3,7 +3,9 @@
  */
 package algorithms.mishra.dev.rahul.hackerrank.problems.implementation;
 
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * https://www.hackerrank.com/challenges/bon-appetit
@@ -33,15 +35,6 @@ public class BonAppetit {
 	}
 	
 	private static int bonAppetit(int n, int k, int b, int[] ar) {
-		int sum = 0;
-		for(int i = 0; i < n; i++) {
-			if(i == k) {
-				continue;
-			}
-			sum += ar[i];
-		}
-		
-		return b - (sum / 2);
+		return b - (Arrays.stream(ar).sum() - ar[k]) / 2;
     }
-
 }

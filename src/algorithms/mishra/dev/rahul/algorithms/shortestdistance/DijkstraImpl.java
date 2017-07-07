@@ -49,9 +49,7 @@ class Graph {
 	}
 
 	public void findShortestPath(String source, String destination) {
-		Node sourceNode = nodeMap.get(source);
-		Node destinationNode = nodeMap.get(destination);
-		if(source == destination) {
+		if(source.equals(destination)) {
 			System.out.println(source);
 			return;
 		}
@@ -59,20 +57,18 @@ class Graph {
 		// Keep track of the visiting nodes, will be used while backtracking from destination to source
 		Map<String, ShortestDistanceNode> visitedNodesMap = new HashMap<>();
 		// Holds node based on the priority of smallest running total from source till that node
-		Queue<ShortestDistanceNode> priorityQueue = new PriorityQueue<>(getComparatorBasedOnRunningTotal());
-		for(Edge edge : sourceNode.getEdgeList()) {
-			ShortestDistanceNode sdn = new ShortestDistanceNode(edge, edge.getWeight());
-			priorityQueue.add(sdn);
+		Queue<ShortestDistanceNode> priorityQueue = new PriorityQueue<>(getComparatorBasedOnTotalRunningDistance());
+		for(Edge edge : nodeMap.get(source).getEdgeList()) {
+			priorityQueue.add(new ShortestDistanceNode(edge, edge.getWeight()));
 			visitedNodesMap.put(edge.getSrc().getName(), null);
 		}
-		Node currentNode = sourceNode;
-		while(currentNode != destinationNode) {
+		Node currentNode = nodeMap.get(source);
+		while(currentNode != nodeMap.get(destination)) {
 			ShortestDistanceNode sdn = priorityQueue.poll();
 			currentNode = sdn.getEdge().getDest();
 			visitedNodesMap.put(currentNode.getName(), sdn);
 			for(Edge edge : currentNode.getEdgeList()) {
-				ShortestDistanceNode shortestDistanceNode = new ShortestDistanceNode(edge, edge.getWeight() + sdn.getRunningDistance());
-				priorityQueue.add(shortestDistanceNode);
+				priorityQueue.add(new ShortestDistanceNode(edge, edge.getWeight() + sdn.getTotalRunningDistance()));
 			}
 		}
 		
@@ -93,8 +89,8 @@ class Graph {
 		
 	}
 
-	private Comparator<ShortestDistanceNode> getComparatorBasedOnRunningTotal() {
-		return (ShortestDistanceNode sdn1, ShortestDistanceNode sdn2) -> sdn1.getRunningDistance().compareTo(sdn2.getRunningDistance());  
+	private Comparator<ShortestDistanceNode> getComparatorBasedOnTotalRunningDistance() {
+		return (ShortestDistanceNode sdn1, ShortestDistanceNode sdn2) -> sdn1.getTotalRunningDistance().compareTo(sdn2.getTotalRunningDistance());  
 	}
 }
 
@@ -181,11 +177,11 @@ class Edge {
 
 class ShortestDistanceNode {
 	private Edge edge;
-	private int runningDistance;
+	private int totalRunningDistance;
 	
 	public ShortestDistanceNode(Edge edge, int runningDistance) {
 		this.edge = edge;
-		this.runningDistance = runningDistance;
+		this.totalRunningDistance = runningDistance;
 	}
 	
 	@Override
@@ -197,15 +193,15 @@ class ShortestDistanceNode {
 		return edge;
 	}
 
-	public Integer getRunningDistance() {
-		return runningDistance;
+	public Integer getTotalRunningDistance() {
+		return totalRunningDistance;
 	}
 
 	public void setEdge(Edge edge) {
 		this.edge = edge;
 	}
 
-	public void setRunningDistance(int runningDistance) {
-		this.runningDistance = runningDistance;
+	public void setTotalRunningDistance(int runningDistance) {
+		this.totalRunningDistance = runningDistance;
 	}
 }

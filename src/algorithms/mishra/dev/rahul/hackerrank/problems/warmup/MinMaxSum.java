@@ -39,7 +39,7 @@ public class MinMaxSum {
 		long min = Long.MAX_VALUE;
 		long max = Long.MIN_VALUE;
 		for(int i = 0; i < array.length; i++) {
-			sum = sum + array[i];
+			sum += array[i];
 			min = min <= array[i] ? min : array[i];
 			max = max >= array[i] ? max : array[i];
 		}
