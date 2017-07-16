@@ -34,6 +34,37 @@ public class LRUCacheImpl {
     }
 }
 
+/**
+ * I have used sentinel HEAD and TAIL nodes to mark the list boundary. Also with these sentinel nodes, I no longer have to perform
+ * NULL check. Also, in this implementation least recently used key-value entry is moved next to the HEAD and most frequently accessed
+ * key-value pair is saved towards the end of the tail of linked list.
+ *
+ * Cache can perform two operations, namely <b><code>PUT</code></b> and <b><code>GET</code></b>.
+ * <p>
+ * <b>PUT</b> performs the following steps:
+ * <li>
+ *     Check if key is null - if yes, then return false
+ * </li>
+ * <li>
+ *     Check if the key value already exists - if yes, then update the new value and return true
+ * </li>
+ * <li>
+ *     Check if LRU has reached it' maximum capacity - if yes, then remove the least recently used entry from the cache and the linked list
+ * </li>
+ * <li>
+ *     And then finally, create a new node with the given key-value pair. Add them to cache and linked list and return true
+ * </li>
+ * </p>
+ * <p>
+ *     <b>GET</b> performs the following steps:
+ *     <li>
+ *         Check if key is null - if yes, then return null
+ *     </li>
+ *     <li>
+ *         Else, retrieve the value from the cache and move the key-value entry to the tail.
+ *     </li>
+ * </p>
+ */
 class LRUCache<K, V> {
     private static final int DEFAULT_CAPACITY = 3;
     private Map<K, Node> cache;
@@ -61,6 +92,10 @@ class LRUCache<K, V> {
     }
 
     public boolean put(K key, V value) {
+        if(Objects.isNull(key)) {
+            System.out.println("Key is NULL. Cannot add NULL key to LRU Cache!!!");
+            return false;
+        }
         // If key already exists, then overwrite the new node value, else create a new entry
         if (!Objects.isNull(cache.get(key))) {
             updateKey(key, value);
