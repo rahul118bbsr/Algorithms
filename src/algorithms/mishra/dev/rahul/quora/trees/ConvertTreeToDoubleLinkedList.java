@@ -71,7 +71,7 @@ public class ConvertTreeToDoubleLinkedList {
 		public Node convertTreeToLinkedListIteratively(Node root) {
 			Node head = null;
 			if(root == null) {
-				return head;
+				return null;
 			}
 			
 			LinkedList linkedList = new LinkedList();
@@ -118,6 +118,11 @@ public class ConvertTreeToDoubleLinkedList {
 
 		Node(int data) {
 			this.data = data;
+		}
+
+		@Override
+		public String toString() {
+			return "" + data;
 		}
 	}
 

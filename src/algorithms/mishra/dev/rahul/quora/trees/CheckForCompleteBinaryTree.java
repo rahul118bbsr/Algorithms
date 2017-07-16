@@ -4,6 +4,7 @@
 package algorithms.mishra.dev.rahul.quora.trees;
 
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Queue;
 
 /**
@@ -60,16 +61,7 @@ public class CheckForCompleteBinaryTree {
 				queue.add(current.right);
 			}
 
-			if (queue.isEmpty()) {
-				return true;
-			} else {
-				for (Node node : queue) {
-					if (node != null) {
-						return false;
-					}
-				}
-			}
-			return true;
+			return queue.isEmpty() || queue.stream().noneMatch(Objects::nonNull);
 		}
 
 		int countNodes(Node root) {

@@ -62,17 +62,6 @@ public class DepthFirstSearch {
 				}
 			}
 		}
-		
-		public void dfsTraversal_postOrder(Node root) {
-			if (root == null) {
-				return;
-			}
-			Stack<Node> stack = new Stack<>();
-			stack.push(root);
-			while (!stack.isEmpty()) {
-				
-			}
-		}
 	}
 
 	class Node {

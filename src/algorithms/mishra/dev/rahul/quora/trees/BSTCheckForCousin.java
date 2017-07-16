@@ -3,6 +3,9 @@
  */
 package algorithms.mishra.dev.rahul.quora.trees;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * http://www.ideserve.co.in/learn/check-if-two-nodes-are-cousins-binary-tree
  * 
@@ -67,11 +70,9 @@ public class BSTCheckForCousin {
 			if (root.data == data) {
 				return new CousinSearchModel(parent, level);
 			} else if (data < root.data) {
-				CousinSearchModel csm = search(root.left, root, data, ++level);
-				return csm;
+				return search(root.left, root, data, ++level);
 			} else if (data > root.data) {
-				CousinSearchModel csm = search(root.right, root, data, ++level);
-				return csm;
+				return search(root.right, root, data, ++level);
 			}
 			return new CousinSearchModel(parent, level);
 		}

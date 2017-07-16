@@ -91,10 +91,6 @@ public class CheckForIdenticalBST {
 				Node c1 = q1.poll();
 				Node c2 = q2.poll();
 
-				if (root1 == null || root2 == null) {
-					return false;
-				}
-
 				if (c1.data != c2.data) {
 					return false;
 				}

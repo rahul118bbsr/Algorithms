@@ -64,7 +64,7 @@ public class DeleteNode {
 				curr = curr.next;
 			}
 			
-			curr.next = curr.next.next == null ? null : curr.next.next;
+			curr.next = curr.next.next;
 			return head;
 		}
 	}

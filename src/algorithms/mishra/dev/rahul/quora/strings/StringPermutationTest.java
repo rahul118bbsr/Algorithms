@@ -4,6 +4,7 @@
 package algorithms.mishra.dev.rahul.quora.strings;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -30,20 +31,25 @@ public class StringPermutationTest {
 		scanner.close();
 		StringPermutation stringPermutation = new StringPermutationTest().new StringPermutation();
 		System.out.println("Result: ");
-		System.out.println(stringPermutation.findAllPermutationOfString(word));
+		System.out.println("Lexographical Order: " + stringPermutation.findAllPermutationOfString(word, true));
+		System.out.println("Non-Lexographical Order: " + stringPermutation.findAllPermutationOfString(word, false));
 
 	}
 
 	class StringPermutation {
 		private List<String> list = new ArrayList<>();
 
-		public List<String> findAllPermutationOfString(String word) {
-			Map<Character, Integer> treeMap = countFrequencyOfDistinctCharacters(word);
+		public List<String> findAllPermutationOfString(String word, boolean lexographicalOrder) {
+			Map<Character, Integer> map = lexographicalOrder ? countFrequencyOfDistinctCharacters(word, new TreeMap<>())
+					: countFrequencyOfDistinctCharacters(word, new HashMap<>());
+			list.clear();
+
 			char[] array = new char[word.length()];
-			char[] distinctChar = new char[treeMap.size()];
-			int[] distinctCharCount = new int[treeMap.size()];
+			char[] distinctChar = new char[map.size()];
+			int[] distinctCharCount = new int[map.size()];
 			int i = 0;
-			for (Entry<Character, Integer> entry : treeMap.entrySet()) {
+
+			for (Entry<Character, Integer> entry : map.entrySet()) {
 				distinctChar[i] = entry.getKey();
 				distinctCharCount[i] = entry.getValue();
 				i++;
@@ -52,16 +58,15 @@ public class StringPermutationTest {
 			return list;
 		}
 
-		public Map<Character, Integer> countFrequencyOfDistinctCharacters(String word) {
-			Map<Character, Integer> treeMap = new TreeMap<>();
+		public Map<Character, Integer> countFrequencyOfDistinctCharacters(String word, Map<Character, Integer> map) {
 			for (Character c : word.toCharArray()) {
-				if (treeMap.get(c) == null) {
-					treeMap.put(c, 1);
+				if (map.get(c) == null) {
+					map.put(c, 1);
 				} else {
-					treeMap.put(c, treeMap.get(c) + 1);
+					map.put(c, map.get(c) + 1);
 				}
 			}
-			return treeMap;
+			return map;
 		}
 
 		private void findAllPermutation(char[] distinctChar, int[] distinctCharCount, char[] result, int level) {

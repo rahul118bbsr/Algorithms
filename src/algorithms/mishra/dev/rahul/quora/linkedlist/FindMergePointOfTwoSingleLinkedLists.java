@@ -54,19 +54,12 @@ public class FindMergePointOfTwoSingleLinkedLists {
 		}
 
 		public Node findMergeNode(Node head1, Node head2) {
-			if (head1 == null && head2 == null) {
-				return null;
-			}
-			if (head1 == null) {
-				return null;
-			}
-			if (head2 == null) {
+			if (head1 == null && head2 == null || head1 == null || head2 == null) {
 				return null;
 			}
 
 			Node curr1 = head1;
 			Node curr2 = head2;
-
 			int count = 0;
 			while (count < 2) {
 				if (curr1 == curr2) {

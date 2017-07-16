@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  * http://www.ideserve.co.in/learn/leaders-in-an-array
- * A leader is an element which is larger than all the elements in the array to its right.
+ * A leader is an element which is larger than all the elements in the array to its next.
  * 
  * @author Rahul Dev Mishra
  * @assignment  

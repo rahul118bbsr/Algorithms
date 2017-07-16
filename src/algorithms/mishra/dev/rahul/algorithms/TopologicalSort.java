@@ -35,7 +35,7 @@ public class TopologicalSort {
 		graph.addEdge("A", "B");
 		graph.addEdge("Y", "X");
 
-		Stack<Node<String>> stack = graph.performTopologicalSort(graph);
+		Stack<Node<String>> stack = graph.performTopologicalSort();
 		while (!stack.isEmpty()) {
 			System.out.print(stack.pop() + ", ");
 		}
@@ -53,10 +53,10 @@ class Graph {
 		map.put(out, outNode);
 	}
 
-	public Stack<Node<String>> performTopologicalSort(Graph graph) {
+	public Stack<Node<String>> performTopologicalSort() {
 		Stack<Node<String>> stack = new Stack<>();
 		Set<Node<String>> visitedNodes = new HashSet<>();
-		map.values().stream().forEach(root -> topologicalSortUtil(root, stack, visitedNodes));
+		map.values().forEach(root -> topologicalSortUtil(root, stack, visitedNodes));
 		return stack;
 	}
 
@@ -65,7 +65,7 @@ class Graph {
 			return;
 		}
 		visitedNodes.add(root);
-		root.getChildNodesList().stream().forEach(node -> topologicalSortUtil(node, stack, visitedNodes));
+		root.getChildNodesList().forEach(node -> topologicalSortUtil(node, stack, visitedNodes));
 		stack.push(root);
 	}
 }

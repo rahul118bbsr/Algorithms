@@ -22,17 +22,27 @@ public class DijkstraImpl {
 
 	public static void main(String[] args) {
 		Graph graph = new Graph();
-		graph.addEdge("A", "B", 2);
-		graph.addEdge("A", "E", 3);
-		graph.addEdge("A", "D", 9);
-		graph.addEdge("B", "C", 2);
-		graph.addEdge("C", "D", 3);
-		graph.addEdge("E", "F", 3);
-		graph.addEdge("E", "D", 1);
-		graph.addEdge("F", "D", 1);
-		graph.addEdge("D", "F", 1);
+//		graph.addEdge("A", "B", 2);
+//		graph.addEdge("A", "E", 3);
+//		graph.addEdge("A", "D", 9);
+//		graph.addEdge("B", "C", 2);
+//		graph.addEdge("C", "D", 3);
+//		graph.addEdge("E", "F", 3);
+//		graph.addEdge("E", "D", 1);
+//		graph.addEdge("F", "D", 1);
+//		graph.addEdge("D", "F", 1);
 		
-		graph.findShortestPath("A", "F");
+		graph.addEdge("A", "B", 1);
+		graph.addEdge("A", "E", 2);
+		graph.addEdge("B", "C", 2);
+		graph.addEdge("A", "D", 9);
+		graph.addEdge("C", "D", 3);
+		graph.addEdge("E", "B", 2);
+		graph.addEdge("E", "D", 6);
+		graph.addEdge("E", "F", 3);
+		graph.addEdge("F", "D", 1);
+		
+		graph.findShortestPath("A", "D");
 	}
 }
 
