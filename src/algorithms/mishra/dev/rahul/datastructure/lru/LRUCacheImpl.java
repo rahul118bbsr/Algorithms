@@ -136,8 +136,6 @@ class LRUCache<K, V> {
         // When adding the 1st entry, head will be pointing to TAIL. Add new elements towards TAIL, so that it doesn't get evicted immediately
         addNodeBeforeTail(newNode);
         cache.put(key, newNode);
-
-
     }
 
     private void addNodeBeforeTail(Node newNode) {
