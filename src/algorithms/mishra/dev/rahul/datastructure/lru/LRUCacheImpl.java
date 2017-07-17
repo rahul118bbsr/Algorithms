@@ -121,15 +121,7 @@ class LRUCache<K, V> {
     private void moveNodeToTail(Node nodeValue) {
         // Break the links of the node and move it to the tail
         removeNodeLinks(nodeValue);
-        addNodeLinks(nodeValue);
-    }
-
-    private void addNodeLinks(Node nodeValue) {
-        Node prev = tail.prev;
-        prev.next = nodeValue;
-        nodeValue.prev = prev;
-        nodeValue.next = tail;
-        tail.prev = nodeValue;
+        addNodeBeforeTail(nodeValue);
     }
 
     private void removeNodeLinks(Node nodeValue) {
@@ -141,15 +133,19 @@ class LRUCache<K, V> {
 
     private void addToCache(K key, V value) {
         Node newNode = new Node(key, value);
-        // When adding the 1st entry, head will be pointing to TAIL. Add new elements towards TAILS, so that it doesn't get evicted immediately
+        // When adding the 1st entry, head will be pointing to TAIL. Add new elements towards TAIL, so that it doesn't get evicted immediately
+        addNodeBeforeTail(newNode);
+        cache.put(key, newNode);
+
+
+    }
+
+    private void addNodeBeforeTail(Node newNode) {
         Node prev = tail.prev;
         prev.next = newNode;
         newNode.prev = prev;
         newNode.next = tail;
         tail.prev = newNode;
-        cache.put(key, newNode);
-
-
     }
 
     private void removeLeastRecentlyUsedKeyFromCacheHead() {
