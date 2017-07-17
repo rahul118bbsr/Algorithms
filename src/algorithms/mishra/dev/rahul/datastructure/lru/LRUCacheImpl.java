@@ -15,28 +15,22 @@ import java.util.Objects;
  */
 public class LRUCacheImpl {
     public static void main(String[] args) {
-        LRUCache<Integer, Integer> lruCache = new LRUCache<>();
-        lruCache.put(1, 100);
-        lruCache.put(2, 200);
-        lruCache.put(3, 300);
+        LRUCache<Integer, Integer> lruCache = new LRUCache<>(2);
+        lruCache.put(2, 1);
+        lruCache.put(1, 1);
         System.out.println(lruCache);
-        System.out.println(lruCache.get(2));
+        lruCache.put(2, 3);
         System.out.println(lruCache);
-        lruCache.put(4, 400);
-        System.out.println(lruCache.get(1));
+        lruCache.put(4, 1);
         System.out.println(lruCache);
-        System.out.println(lruCache.get(4));
-        System.out.println(lruCache);
-        lruCache.put(5, 500);
-        System.out.println(lruCache);
-        lruCache.put(5, 600);
-        System.out.println(lruCache);
+        lruCache.get(1);
+        lruCache.get(2);
     }
 }
 
 /**
  * I have used sentinel HEAD and TAIL nodes to mark the list boundary. Also with these sentinel nodes, I no longer have to perform
- * NULL check. Also, in this implementation least recently used key-value entry is moved next to the HEAD and most frequently accessed
+ * NULL check. In this implementation least recently used key-value entry is moved next to the HEAD and most frequently accessed
  * key-value pair is saved towards the end of the tail of linked list.
  *
  * Cache can perform two operations, namely <b><code>PUT</code></b> and <b><code>GET</code></b>.
@@ -147,12 +141,15 @@ class LRUCache<K, V> {
 
     private void addToCache(K key, V value) {
         Node newNode = new Node(key, value);
-        // When adding the 1st entry, head will be pointing to TAIL.
-        newNode.next = head.next;
-        head.next = newNode;
-        newNode.prev = head;
-        newNode.next.prev = newNode;
+        // When adding the 1st entry, head will be pointing to TAIL. Add new elements towards TAILS, so that it doesn't get evicted immediately
+        Node prev = tail.prev;
+        prev.next = newNode;
+        newNode.prev = prev;
+        newNode.next = tail;
+        tail.prev = newNode;
         cache.put(key, newNode);
+
+
     }
 
     private void removeLeastRecentlyUsedKeyFromCacheHead() {
@@ -166,8 +163,9 @@ class LRUCache<K, V> {
 
     private void updateKey(K key, V value) {
         Node node = cache.get(key);
-        node.value = value;
-        cache.put(key, node);
+        // An update should also be considered as a new entry and hence move it towards the tail
+        removeNodeLinks(node);
+        addToCache(key, value);
     }
 
     @Override

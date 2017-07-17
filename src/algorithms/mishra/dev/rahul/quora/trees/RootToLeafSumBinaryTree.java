@@ -19,7 +19,6 @@ public class RootToLeafSumBinaryTree {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 	}
 	
@@ -34,22 +33,33 @@ public class RootToLeafSumBinaryTree {
 			return root;
 		}
 		
-		private List<List<Integer>> resultList = new ArrayList<List<Integer>>();
-	    
-	    public void pathSumInner(Node root, int sum, Stack<Integer>path) {
-	        path.push(root.data);
-	        if(root.left == null && root.right == null)
-	            if(sum == root.data) resultList.add(new ArrayList<Integer>(path));
-	        if(root.left!=null) pathSumInner(root.left, sum-root.data, path);
-	        if(root.right!=null)pathSumInner(root.right, sum-root.data, path);
-	        path.pop();
-	    }
-	    
-	    public List<List<Integer>> pathSum(Node root, int sum) {
-	        if(root==null) return resultList;
-	        Stack<Integer> path = new Stack<Integer>();
-	        pathSumInner(root, sum, path);
-	        return resultList;
+
+	    public boolean pathSumInner(Node root, int sum) {
+			if(root == null) {
+				return false;
+			}
+			Stack<Node> stack = new Stack<>();
+			Stack<Integer> sumFromRootTillNode = new Stack<>();
+			stack.push(root);
+			sumFromRootTillNode.push(root.data);
+			while(!stack.isEmpty()) {
+				Node node = stack.pop();
+				int sumSofar = sumFromRootTillNode.pop();
+				if(node.left == null && node.right == null) {
+					if(sumSofar == sum) {
+						return true;
+					}
+				}
+				if(node.right != null) {
+					stack.push(node.right);
+					sumFromRootTillNode.push(sumSofar + node.right.data);
+				}
+				if(node.left != null) {
+					stack.push(node.left);
+					sumFromRootTillNode.push(sumSofar + node.left.data);
+				}
+			}
+			return false;
 	    }
 	}
 
