@@ -3,6 +3,8 @@
  */
 package algorithms.mishra.dev.rahul.quora.trees;
 
+import java.util.Stack;
+
 /**
  * @author Rahul Dev Mishra
  * @assignment  
@@ -23,7 +25,6 @@ public class CheckIfBST {
 		root = bst.add(root, 2);
 
 		System.out.println(bst.checkIfBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
-		
 		bst.modifyTree(root, 2, 10);
 		System.out.println(bst.checkIfBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
 	}
@@ -77,6 +78,11 @@ public class CheckIfBST {
 		
 		public Node(int data) {
 			this.data = data;
+		}
+
+		@Override
+		public String toString() {
+			return data + "";
 		}
 	}
 	

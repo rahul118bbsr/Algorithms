@@ -148,13 +148,12 @@ public class CheckForSameLevelNodes {
 			for (Node node : queue) {
 				if (node.data == data1) {
 					b1 = true;
-					break;
-				}
-			}
-			for (Node node : queue) {
-				if (node.data == data2) {
+				} else if (node.data == data2) {
 					b2 = true;
-					break;
+				}
+				
+				if(b1 && b2) {
+					return true;
 				}
 			}
 			return b1 && b2;

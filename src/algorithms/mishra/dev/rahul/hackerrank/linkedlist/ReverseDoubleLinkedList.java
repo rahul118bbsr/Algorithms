@@ -54,9 +54,9 @@ public class ReverseDoubleLinkedList {
 		        return null;
 		    }
 		    while(head != null){
-		        Node temp = head.prev;
-		        head.prev = head.next;
-		        head.next = temp;
+		        Node temp = head.next;
+		        head.next = head.prev;
+		        head.prev = temp;
 		        if (head.prev == null){
 		            return head;
 		        }

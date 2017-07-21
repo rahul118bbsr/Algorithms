@@ -39,7 +39,7 @@ public class KMP {
 				}
 			}
 		}
-		return j == pattern.length() ? i : -1;
+		return j == pattern.length() ? i - j : -1;
 	}
 
 	private int[] buildFailureFunctionTable(String pattern) {
@@ -63,5 +63,4 @@ public class KMP {
 
 		return table;
 	}
-
 }

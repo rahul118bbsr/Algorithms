@@ -3,6 +3,8 @@
  */
 package algorithms.mishra.dev.rahul.quora.trees;
 
+import java.util.Stack;
+
 /**
  * @author Rahul Dev Mishra
  * @assignment
@@ -80,6 +82,11 @@ public class CheckIfTreeBalanced {
 
 		Node(int data) {
 			this.data = data;
+		}
+
+		@Override
+		public String toString() {
+			return data + "";
 		}
 	}
 

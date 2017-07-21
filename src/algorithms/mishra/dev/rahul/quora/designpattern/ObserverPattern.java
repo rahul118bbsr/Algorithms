@@ -18,9 +18,9 @@ public class ObserverPattern {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		WeatherStation weatherStation = new WeatherStation();
-		WeatherObserver wo1 = new Observer1();
-		WeatherObserver wo2 = new Observer2();
+		Station weatherStation = new Station();
+		Observer wo1 = new Observer1();
+		Observer wo2 = new Observer2();
 		
 		weatherStation.register(wo1);
 		weatherStation.register(wo2);
@@ -31,33 +31,33 @@ public class ObserverPattern {
 
 }
 
-interface WeatherSubject {
-	void register(WeatherObserver weatherObserver);
-	void deregister(WeatherObserver weatherObserver);
+interface Subject {
+	void register(Observer observer);
+	void deregister(Observer observer);
 	void doNotify();
 	
 }
 
-interface WeatherObserver {
+interface Observer {
 	void doUpdate(int temp);
 }
 
-class WeatherStation implements WeatherSubject {
-	private Set<WeatherObserver> obervers;
+class Station implements Subject {
+	private Set<Observer> obervers;
 	private int temp;
 	
-	public WeatherStation() {
+	public Station() {
 		obervers = new HashSet<>();
 	}
 
 	@Override
-	public void register(WeatherObserver weatherObserver) {
-		obervers.add(weatherObserver);
+	public void register(Observer observer) {
+		obervers.add(observer);
 	}
 
 	@Override
-	public void deregister(WeatherObserver weatherObserver) {
-		obervers.remove(weatherObserver);
+	public void deregister(Observer observer) {
+		obervers.remove(observer);
 	}
 
 	@Override
@@ -72,7 +72,7 @@ class WeatherStation implements WeatherSubject {
 	}
 }
 
-class Observer1 implements WeatherObserver {
+class Observer1 implements Observer {
 
 	@Override
 	public void doUpdate(int temp) {
@@ -80,7 +80,7 @@ class Observer1 implements WeatherObserver {
 	}
 }
 
-class Observer2 implements WeatherObserver {
+class Observer2 implements Observer {
 	@Override
 	public void doUpdate(int temp) {
 		System.out.println("Observer2 has detected change in temperature: " + temp);

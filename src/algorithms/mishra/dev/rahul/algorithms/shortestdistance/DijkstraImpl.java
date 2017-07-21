@@ -100,7 +100,7 @@ class Graph {
 	}
 
 	private Comparator<ShortestDistanceNode> getComparatorBasedOnTotalRunningDistance() {
-		return (ShortestDistanceNode sdn1, ShortestDistanceNode sdn2) -> sdn1.getTotalRunningDistance().compareTo(sdn2.getTotalRunningDistance());  
+		return Comparator.comparing(ShortestDistanceNode::getTotalRunningDistance);
 	}
 }
 

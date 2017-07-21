@@ -10,7 +10,7 @@ import java.util.Stack;
 public class FindLargestBSTInBinaryTree {
     public static void main(String[] args) {
         BinaryTree binaryTree = new FindLargestBSTInBinaryTree().new BinaryTree();
-        System.out.println(binaryTree.findSizeOfBST_1(binaryTree.create()));
+        System.out.println(binaryTree.findSizeOfBST(binaryTree.create()));
     }
 
     class BinaryTree {
@@ -27,7 +27,7 @@ public class FindLargestBSTInBinaryTree {
             return root;
         }
 
-        private int findSizeOfBST_1(Node root) {
+        private int findSizeOfBST(Node root) {
             if (root == null) {
                 return 0;
             }

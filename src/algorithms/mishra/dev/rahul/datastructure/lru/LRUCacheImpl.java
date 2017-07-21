@@ -7,9 +7,9 @@ import java.util.Objects;
 /**
  * I have used sentinel HEAD and TAIL nodes to mark the list boundary. Also with these sentinel nodes, I no longer have to perform
  * NULL check.
- *
+ * <p>
  * Cache can perform two operations namely <b><code>PUT</code></b> and <b><code>GET</code></b>.
- *<p>
+ * <p>
  * Created by aleesha on 16/07/17.
  * </p>
  */
@@ -25,6 +25,9 @@ public class LRUCacheImpl {
         System.out.println(lruCache);
         lruCache.get(1);
         lruCache.get(2);
+        lruCache.put(4, 100);
+        System.out.println(lruCache);
+        lruCache.get(4);
     }
 }
 
@@ -32,31 +35,31 @@ public class LRUCacheImpl {
  * I have used sentinel HEAD and TAIL nodes to mark the list boundary. Also with these sentinel nodes, I no longer have to perform
  * NULL check. In this implementation least recently used key-value entry is moved next to the HEAD and most frequently accessed
  * key-value pair is saved towards the end of the tail of linked list.
- *
+ * <p>
  * Cache can perform two operations, namely <b><code>PUT</code></b> and <b><code>GET</code></b>.
  * <p>
  * <b>PUT</b> performs the following steps:
  * <li>
- *     Check if key is null - if yes, then return false
+ * Check if key is null - if yes, then return false
  * </li>
  * <li>
- *     Check if the key value already exists - if yes, then update the new value and return true
+ * Check if the key value already exists - if yes, then update the new value and return true
  * </li>
  * <li>
- *     Check if LRU has reached it' maximum capacity - if yes, then remove the least recently used entry from the cache and the linked list
+ * Check if LRU has reached it' maximum capacity - if yes, then remove the least recently used entry from the cache and the linked list
  * </li>
  * <li>
- *     And then finally, create a new node with the given key-value pair. Add them to cache and linked list and return true
+ * And then finally, create a new node with the given key-value pair. Add them to cache and linked list and return true
  * </li>
  * </p>
  * <p>
- *     <b>GET</b> performs the following steps:
- *     <li>
- *         Check if key is null - if yes, then return null
- *     </li>
- *     <li>
- *         Else, retrieve the value from the cache and move the key-value entry to the tail.
- *     </li>
+ * <b>GET</b> performs the following steps:
+ * <li>
+ * Check if key is null - if yes, then return null
+ * </li>
+ * <li>
+ * Else, retrieve the value from the cache and move the key-value entry to the tail.
+ * </li>
  * </p>
  */
 class LRUCache<K, V> {
@@ -86,7 +89,7 @@ class LRUCache<K, V> {
     }
 
     public boolean put(K key, V value) {
-        if(Objects.isNull(key)) {
+        if (Objects.isNull(key)) {
             System.out.println("Key is NULL. Cannot add NULL key to LRU Cache!!!");
             return false;
         }
@@ -110,7 +113,7 @@ class LRUCache<K, V> {
 
     public V get(K key) {
         Node nodeValue = cache.get(key);
-        if(Objects.isNull(nodeValue)) {
+        if (Objects.isNull(nodeValue)) {
             return null;
         }
         moveNodeToTail(nodeValue);
@@ -159,14 +162,15 @@ class LRUCache<K, V> {
         Node node = cache.get(key);
         // An update should also be considered as a new entry and hence move it towards the tail
         removeNodeLinks(node);
-        addToCache(key, value);
+        addNodeBeforeTail(node);
+        node.value = value;
     }
 
     @Override
     public String toString() {
         String string = "";
         Node curr = head.next;
-        while(curr != tail) {
+        while (curr != tail) {
             string = string + curr.toString() + " ";
             curr = curr.next;
         }

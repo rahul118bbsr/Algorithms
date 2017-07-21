@@ -3,6 +3,8 @@
  */
 package algorithms.mishra.dev.rahul.quora.trees;
 
+import java.util.Stack;
+
 /**
  * @author Rahul Dev Mishra
  * @assignment  
@@ -17,6 +19,7 @@ public class CheckForFullBinaryTree {
 	public static void main(String[] args) {
 		Tree tree = new CheckForFullBinaryTree().new Tree();
 		System.out.println(tree.isTreeFull(tree.createTree()));
+		System.out.println(tree.isTreeFullIterative(tree.createTree()));
 	}
 	
 	class Tree {
@@ -38,6 +41,29 @@ public class CheckForFullBinaryTree {
 				return false;
 			}
 			return isTreeFull(root.left) && isTreeFull(root.right);
+		}
+
+		public boolean isTreeFullIterative(Node root) {
+			if(root == null) {
+				return false;
+			}
+
+			Stack<Node> stack = new Stack<>();
+			stack.push(root);
+			while(!stack.isEmpty()) {
+				Node node = stack.pop();
+				if((node.left == null && node.right != null) || (node.left != null && node.right == null)) {
+					return false;
+				}
+
+				if(node.left != null) {
+					stack.push(node.left);
+				}
+				if(node.right != null) {
+					stack.push(node.right);
+				}
+			}
+			return true;
 		}
 	}
 	

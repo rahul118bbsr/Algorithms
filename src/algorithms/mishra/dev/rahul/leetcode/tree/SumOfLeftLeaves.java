@@ -30,12 +30,13 @@ public class SumOfLeftLeaves {
             int sum = 0;
             while(!stack.isEmpty()) {
                 Node node = stack.pop();
+                if(node.right != null) {
+                    stack.push(node.right);
+                }
+                
                 if(node.left != null) {
                     stack.push(node.left);
                     sum = node.left.left == null && node.left.right == null ? sum + node.left.data : sum;
-                }
-                if(node.right != null) {
-                    stack.push(node.right);
                 }
             }
             return sum;
